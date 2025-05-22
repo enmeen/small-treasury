@@ -1,0 +1,7 @@
+{
+  "piggyBank": {
+    "balance": 0,
+    "transactions": [],
+    "goals": []
+  }
+} 

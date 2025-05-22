@@ -1,0 +1,21 @@
+{
+  "name": "small-treasury",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "json-server --watch db.json --port 3001",
+    "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "concurrently": "^8.2.2",
+    "json-server": "^0.17.4",
+    "svelte": "^5.28.1",
+    "vite": "^6.3.5"
+  }
+}
