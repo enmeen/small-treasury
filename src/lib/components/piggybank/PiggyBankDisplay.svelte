@@ -1,6 +1,7 @@
 <script>
   import { spring } from 'svelte/motion';
   import { onMount } from 'svelte';
+  import dogImage from '../../../assets/卡通小狗制作.png';
   
   // 参数
   export let balance = 0;
@@ -94,23 +95,16 @@
 </script>
 
 <div class="piggy-bank-container">
-  <div class="piggy-bank">
-    <div class="pig-body">
+  <div class="doggy-bank">
+    <div class="dog-container">
+      <!-- 使用卡通狗图片 -->
+      <img src={dogImage} alt="狗狗储钱罐" class="dog-image" />
+      
+      <!-- 投币槽 -->
       <div class="coin-slot"></div>
-      <div class="pig-eye left"></div>
-      <div class="pig-eye right"></div>
-      <div class="pig-nose"></div>
-      <div class="pig-ear left"></div>
-      <div class="pig-ear right"></div>
       
       <!-- 金钱填充区域 -->
       <div class="money-fill" style="height: {fillPercentage}%"></div>
-    </div>
-    <div class="pig-legs">
-      <div class="leg front-left"></div>
-      <div class="leg front-right"></div>
-      <div class="leg back-left"></div>
-      <div class="leg back-right"></div>
     </div>
     
     <!-- 投币动画 -->
@@ -142,20 +136,27 @@
     align-items: center;
   }
   
-  .piggy-bank {
+  .doggy-bank {
     position: relative;
-    width: 200px;
-    height: 160px;
+    width: 220px;
+    height: 200px;
     margin-bottom: 2rem;
   }
   
-  .pig-body {
+  .dog-container {
     position: relative;
-    width: 200px;
-    height: 140px;
-    background-color: #ffb6c1;
-    border-radius: 100px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .dog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
   }
   
   .coin-slot {
@@ -167,67 +168,7 @@
     height: 5px;
     background-color: #333;
     border-radius: 5px;
-  }
-  
-  .pig-eye {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background-color: #333;
-    border-radius: 50%;
-    top: 45px;
-  }
-  
-  .pig-eye.left {
-    left: 50px;
-  }
-  
-  .pig-eye.right {
-    right: 50px;
-  }
-  
-  .pig-nose {
-    position: absolute;
-    width: 30px;
-    height: 22px;
-    background-color: #ff7f7f;
-    border-radius: 50%;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .pig-ear {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #ffb6c1;
-    border-radius: 50%;
-    top: 20px;
-  }
-  
-  .pig-ear.left {
-    left: 10px;
-    transform: rotate(-30deg);
-  }
-  
-  .pig-ear.right {
-    right: 10px;
-    transform: rotate(30deg);
-  }
-  
-  .pig-legs {
-    display: flex;
-    justify-content: space-between;
-    width: 180px;
-    margin: 0 auto;
-  }
-  
-  .leg {
-    width: 15px;
-    height: 20px;
-    background-color: #ffb6c1;
-    border-radius: 5px;
+    z-index: 3;
   }
   
   .money-fill {
@@ -236,6 +177,7 @@
     width: 100%;
     background-color: rgba(255, 215, 0, 0.5);
     transition: height 0.5s ease-out;
+    z-index: 1;
   }
   
   .balance-display {
