@@ -30,13 +30,7 @@
   
   // 处理完成目标
   const handleCompleteGoal = (goalId) => {
-    const goal = $piggyBankStore.goals.find(g => g.id === goalId);
-    if (!goal) return;
-    
-    // 先扣除余额
-    addMoney(-goal.amount, `完成目标：${goal.name}`);
-    
-    // 再标记为完成
+    // 直接标记目标为完成，API会自动处理扣款
     completeGoal(goalId);
   };
   

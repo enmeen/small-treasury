@@ -19,7 +19,6 @@ export const refreshData = async () => {
     return data;
   } catch (error) {
     console.error('刷新数据失败:', error);
-    return defaultData;
   }
 };
 

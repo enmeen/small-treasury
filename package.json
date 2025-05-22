@@ -4,16 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5173",
     "build": "vite build",
     "preview": "vite preview",
-    "server": "json-server --watch db.json --port 3001",
+    "server": "cross-env PORT=5174 node server.js",
     "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
     "start": "node server.js"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "svelte": "^5.28.1",
     "vite": "^6.3.5"
   },

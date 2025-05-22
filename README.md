@@ -10,12 +10,14 @@
 - 家长管理后台（密码保护）
 - 交易记录查看
 - 响应式设计，支持移动设备
+- **多用户账号系统**（每个用户拥有独立数据）
 
 ## 技术栈
 
 - 前端：Svelte + Vite
 - 后端：JSON-Server (RESTful API)
 - 存储：JSON文件 + localStorage备份
+- 认证：简易令牌认证
 
 ## 快速开始
 
@@ -45,7 +47,7 @@ npm run server
 ```
 
 前端服务将在 http://localhost:5173 运行
-API服务将在 http://localhost:3001 运行
+API服务将在 http://localhost:5174 运行
 
 ### 生产构建
 
@@ -62,9 +64,22 @@ npm run start
 
 生产服务器将在 http://localhost:8080 运行
 
+## 用户账号系统
+
+应用现在支持多用户，每个用户拥有独立的储钱罐数据。
+
+### 默认测试账号
+
+- 用户名：demo
+- 密码：demo123
+
+### 注册新账号
+
+任何人都可以注册新账号，注册后自动创建新的储钱罐数据。
+
 ## API 数据结构
 
-数据存储在 `db.json` 文件中，结构如下：
+每个用户的数据存储在 `db_[username].json` 文件中，结构如下：
 
 ```json
 {
@@ -92,6 +107,21 @@ npm run start
 }
 ```
 
+用户信息存储在 `users.json` 文件中，结构如下：
+
+```json
+{
+  "users": [
+    {
+      "username": "demo",
+      "password": "demo123",
+      "displayName": "演示账号",
+      "createdAt": "2023-05-01T00:00:00Z"
+    }
+  ]
+}
+```
+
 ## 部署指南
 
 ### 使用 Vercel 部署
@@ -103,13 +133,13 @@ npm run start
 ### 使用自己的服务器部署
 
 1. 构建项目：`npm run build`
-2. 将 `dist` 目录和 `server.js`, `db.json` 文件上传到服务器
+2. 将 `dist` 目录和 `server.js`, `users.json`, `db_*.json` 文件上传到服务器
 3. 安装依赖：`npm install json-server`
 4. 启动服务：`node server.js`
 
 ## 更新数据备份
 
-应用使用 `localStorage` 作为数据备份，如果API服务器不可用，数据将自动从本地存储加载和保存。
+应用使用 `localStorage` 作为数据备份，如果API服务器不可用，数据将自动从本地存储加载和保存。每个用户的数据分别存储。
 
 ## 关于项目
 

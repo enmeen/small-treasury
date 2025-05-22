@@ -1,3 +1,7 @@
+/* 导入全局样式 */
+@import './styles/global.css';
+/* 注意：components.css 已在 main.js 中导入，这里移除重复导入 */
+
 :root {
   --primary-color: #ff6b6b;
   --secondary-color: #4ecdc4;

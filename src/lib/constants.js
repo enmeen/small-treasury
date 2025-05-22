@@ -1,22 +1,9 @@
 // 认证相关
-export const AUTH_KEY = 'piggyBankAuth';
-export const DEFAULT_PASSWORD = '1234';
+// 注意：AUTH_KEY 未被使用，已移除
 
 // 储蓄相关
-export const MAX_PROGRESS = 100;
+// 注意：MAX_PROGRESS 未被使用，已移除
 
-// 网页大小断点
-export const BREAKPOINTS = {
-  mobile: 480,
-  tablet: 768
-};
-
-// 颜色主题
-export const THEME = {
-  primary: '#4caf50',
-  secondary: '#4ecdc4',
-  accent: '#ffbe0b',
-  danger: '#f44336',
-  piggyColor: '#ffb6c1',
-  moneyFill: 'rgba(255, 215, 0, 0.5)'
-}; 
+// 以下常量未被任何地方引用，已全部移除
+// BREAKPOINTS
+// THEME 

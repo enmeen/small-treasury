@@ -1,37 +1,47 @@
 import jsonServer from 'json-server';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
+import { join } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// 导入工具函数
+import { getStaticDir, getRootDir } from './server/utils/fileUtils.js';
+
+// 导入中间件
+import { corsMiddleware, authMiddleware } from './server/middleware/auth.js';
+import { spaMiddleware } from './server/middleware/spa.js';
+
+// 导入路由处理
+import { setupUserRoutes } from './server/routes/users.js';
+import { setupDataRoutes } from './server/routes/data.js';
+
+// 创建服务器实例
 const server = jsonServer.create();
-const router = jsonServer.router('db.json');
+
+// 读取用户路由器
+const usersRouter = jsonServer.router(join(getRootDir(), 'users.json'));
+
+// 使用标准中间件
 const middlewares = jsonServer.defaults({
-  static: join(__dirname, 'dist')
+  static: getStaticDir()
 });
 
 // 读取端口，默认8080
 const port = process.env.PORT || 8080;
+// 检查是否为开发环境
+const isDev = port === 5174;
 
-// 使用json-server中间件
+// 应用中间件
 server.use(middlewares);
+server.use(jsonServer.bodyParser);
+server.use(corsMiddleware(isDev));
+server.use(authMiddleware);
 
-// 配置json-server的路由规则
-server.use('/api', router);
+// 设置路由
+setupUserRoutes(server);
+setupDataRoutes(server, usersRouter);
 
-// 前端路由处理 - 将非API请求重定向到index.html
-server.use((req, res, next) => {
-  if (!req.path.startsWith('/api')) {
-    const indexHtml = join(__dirname, 'dist', 'index.html');
-    if (fs.existsSync(indexHtml)) {
-      res.sendFile(indexHtml);
-      return;
-    }
-  }
-  next();
-});
+// SPA前端路由处理
+server.use(spaMiddleware);
 
 // 启动服务器
 server.listen(port, () => {
-  console.log(`应用已启动，访问: http://localhost:${port}`);
+  console.log(`应用已启动，访问: http://localhost:${port}${isDev ? ' (开发模式)' : ''}`);
 }); 

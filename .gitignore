@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+dist
 dist-ssr
 *.local
 
@@ -22,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# JSON-Server
+# 用户数据文件
 db.json
+db_*.json
+!db_demo.json
+!db.json.example
